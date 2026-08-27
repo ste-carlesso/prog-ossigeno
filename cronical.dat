@@ -1,0 +1,22 @@
+﻿# Jobs to run
+# *    *    *    *    *  command to execute
+# ¦    ¦    ¦    ¦    ¦
+# ¦    ¦    ¦    ¦    +----- day of week (0 - 6) (0 to 6 are Sunday to Saturday, or use names)
+# ¦    ¦    ¦    +---------- month (1 - 12)
+# ¦    ¦    +--------------- day of month (1 - 31)
+# ¦    +-------------------- hour (0 - 23)
+# +------------------------- min (0 - 59)
+
+
+# Il loggernet scarica nella prima cartella
+
+# alle 5:00, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
+30 5 * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v2.sh
+
+# Alle 5:30 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
+0 6 * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v1.sh
+
+#Test
+# * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\messager.sh
+# * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v2.sh
+# * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v1.sh
