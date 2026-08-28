@@ -1,13 +1,12 @@
 
 """
 2011-2016 @author Simone Stucchi <simone.stucchi@gmail.com>
-2020-2022 @author Stefano Carlesso <s.carlesso@fondazioneomd.it>
+2020-2026 @author Stefano Carlesso <s.carlesso@fondazioneomd.it>
 Code was translated from Ruby to Python
 ----
 requirements 
-* Windows 10
-* Python 3.9
-* curl 
+* Windows 10 or 11
+* Python >= 3.9
 * Manually make directories: first_dir, second_dir, third_dir, fourth_dir
 
 """
@@ -35,11 +34,8 @@ logging.basicConfig(
 )
 
 
-curl_path = Path("C:/Windows/System32/curl.exe")
 scp_path = Path("C:/Windows/System32/OpenSSH/scp.exe")
-sftp_path = Path("C:/Windows/System32/OpenSSH/sftp.exe")
 ssh_path = Path("C:/Windows/System32/OpenSSH/ssh.exe")
-
 
 month_name_dict = {
     "01": "gennaio", "02": "febbraio", "03": "marzo", "04": "aprile",
@@ -51,8 +47,7 @@ fosforo = {
     #"address": "15.161.209.22", # on the internet
     "address": "10.8.0.1", # on openVPN lan 
     "user": "fondazione",
-    # "private_key" : Path("C:/msys/home/Fondazione/.ssh/id_rsa"),
-    "private_key": Path("C:/Users/home/Fondazione/.ssh/id_rsa"),
+    "private_key": Path("C:/Users/home/Fondazione/.ssh/id_ed25519"),
     "dest_stazioni": PurePosixPath("/srv/samba/stazioni_gestite2"),
 }
 
@@ -60,7 +55,7 @@ fosforo = {
     
 
 def to_fosforo():
-    '''Take any Dat (Main abd Dia) from 2nd dir, upload to FOSFORO, 
+    '''Take any Dat (Main and Dia) from 2nd dir, upload to FOSFORO, 
     if successful move to 4th dir
     Requires keys setup and ssh config in C:/Users/$USER/.ssh/config
     '''

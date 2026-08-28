@@ -21,7 +21,7 @@ url='http://46.137.162.248/load-jobs'
 
 cd  $second_dir
 
-wow='{ success: true }'
+wow='{ succcess: true }'
 
 for leaf in *.dat; do
 	if [[ "$leaf" ==  *MainDataSet*.dat ]] ; then

@@ -11,8 +11,8 @@ import datetime as dt
 ## THE IMPORTANT VARIABLES ##
 
 
-scp_path = Path("C:\Windows\System32\OpenSSH\scp.exe")
-ssh_path = Path("C:\Windows\System32\OpenSSH\ssh.exe")
+scp_path = Path("C:/Windows/System32/OpenSSH/scp.exe")
+ssh_path = Path("C:/Windows/System32/OpenSSH/ssh.exe")
 month_name_dict = {
     "01":"gennaio", "02":"febbraio", "03":"marzo", "04":"aprile",
     "05":"maggio", "06":"giugno", "07":"luglio", "08":"agosto",
@@ -32,7 +32,7 @@ source_path = Path("D:/RAW")
 yed = dt.datetime.today() - dt.timedelta(days = 1)
 
 ## THE RAW FILES LOOP ##
-#D:\RAW\Citta_Studi\MILANO_CITTA_STUDI_RawData.dat
+
 for item in ["Citta_Studi", "Roma_Termini"]:
     item_path = source_path.joinpath(Path(item))
     pattern = "*RaWData*{:d}_{:02d}_{:02d}*.dat".format(yed.year, yed.month, yed.day)

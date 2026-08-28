@@ -1,2 +1,2 @@
-"C:\Program Files\Python311\python.exe" "C:\cronical\upload_to_fosforo.py"
-"C:\Program Files\Python311\python.exe" "C:\cronical\upload_raw.py"
+"D:\script_ossigeno\env\Scripts\python.exe" "D:\script_ossigeno\upload_to_fosforo.py"
+REM "D:\script_ossigeno\env\Scripts\python.exe" "D:\script_ossigeno\upload_raw.py"

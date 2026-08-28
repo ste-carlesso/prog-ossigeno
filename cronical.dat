@@ -10,13 +10,18 @@
 
 # Il loggernet scarica nella prima cartella
 
-# alle 5:00, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
+# alle 5:30, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
 30 5 * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v2.sh
 
-# Alle 5:30 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
+# Alle 6:00 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
 0 6 * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v1.sh
+
+# Alle 6:50 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
+50 6 * * * cmd /c D:\script_ossigeno\UPLOAD_TO_FOSFORO.bat
 
 #Test
 # * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\messager.sh
 # * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v2.sh
 # * * * * * cmd /c C:\Git\git-bash.exe D:\script_ossigeno\upload_to_v1.sh
+#* * * * * cmd /c D:\script_ossigeno\UPLOAD_TO_FOSFORO.bat
+* * * * * cmd /c D:\script_ossigeno\env\Scripts\python.exe D:\script_ossigeno\upload_to_fosforo.py
