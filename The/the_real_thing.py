@@ -5,12 +5,12 @@ from pathlib import Path
 import configparser
 import requests
 
-base_dir = Path('C:/Users/Stefano')
+base_dir = Path('D:/')
 first_dir = base_dir / "Climate_Network"
 second_dir = base_dir / "Climate_Network_bis"
 
 config = configparser.ConfigParser()
-config.read('secret.ini')
+config.read('the_secret.ini')
 token = config.get("api", "token")
 
 # v2-PROD URL
@@ -19,11 +19,11 @@ endpoint1 = base_url + "/api/v1/load-jobs"
 endpoint2 = base_url + "/api/v1/battery-samples"
 
 my_headers = {
-    'accept': 'application/json',
+    #'accept': 'application/json',
     'Authorization': f"Bearer {token}",
     'Content-Type': 'multipart/form-data',
     }
-
+print(my_headers)
 for element in first_dir.glob("*MainDataSet*.dat"):
     my_files = {'file': open(element, 'rb')}
     try:
@@ -34,6 +34,7 @@ for element in first_dir.glob("*MainDataSet*.dat"):
         )
 
         element.move(second_dir)
+        print(response)
         
     except:
         print("There was an error during HTTP request")    
@@ -48,6 +49,7 @@ for element in first_dir.glob("*Dia*.dat"):
         )
 
         element.move(second_dir)
+        print(response)
         
     except:
         print("There was an error during HTTP request")    
