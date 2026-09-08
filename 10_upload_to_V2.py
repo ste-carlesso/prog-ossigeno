@@ -12,8 +12,6 @@
 
 from pathlib import Path
 import requests
-from oauthlib.oauth2 import BackendApplicationClient
-from requests_oauthlib import OAuth2Session
 import tomllib
 
 with open('secret.toml', 'rb') as secret:
@@ -39,12 +37,12 @@ for dat_file in first_dir.glob("*MainDataSet*.dat"):
     files = {'file': open(dat_file, 'rb'),}
     response = requests.post(endpoint1, headers=headers, files=files)
     print(response.json())
-    my_files = {'file': open(dat_file, 'rb')}
+    if response.json()['success']:
+        dat_file.move_into(second_dir)
 
 for dat_file in first_dir.glob("*Dia*.dat"):
     files = {'file': open(dat_file, 'rb'),}
-    response = requests.post(endpoint1, headers=headers, files=files)
+    response = requests.post(endpoint2, headers=headers, files=files)
     print(response.json())
-    my_files = {'file': open(dat_file, 'rb')}
-
-        
+    if response.json()['status'] == 'success':
+        dat_file.move_into(second_dir)
