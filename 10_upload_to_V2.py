@@ -13,11 +13,15 @@
 from pathlib import Path
 import requests
 import tomllib
+import os
+import glob
+import shutil
 
 with open('secret.toml', 'rb') as secret:
     config = tomllib.load(secret)
 
-base_dir = Path(config['main']['base_dir'])
+base_dir = Path('D:/')
+
 token = config['api']['token']
 base_url = "https://fomdatamet.it"
 
@@ -37,12 +41,15 @@ for dat_file in first_dir.glob("*MainDataSet*.dat"):
     files = {'file': open(dat_file, 'rb'),}
     response = requests.post(endpoint1, headers=headers, files=files)
     print(response.json())
-    if response.json()['success']:
-        dat_file.move_into(second_dir)
+    # if response.json()['success']:
+        # #dat_file.move(second_dir)
+        # shutil.copyfile(dat_file, second_dir)
+        # os.rename(dat_file)
 
 for dat_file in first_dir.glob("*Dia*.dat"):
     files = {'file': open(dat_file, 'rb'),}
     response = requests.post(endpoint2, headers=headers, files=files)
     print(response.json())
-    if response.json()['status'] == 'success':
-        dat_file.move_into(second_dir)
+    # if response.json()['status'] == 'success':
+        # shutil.copyfile(dat_file, second_dir)
+        # os.remove(dat_file)

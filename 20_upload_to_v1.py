@@ -30,9 +30,9 @@ for dat_file in second_dir.glob("*MainDataSet*.dat"):
     response = requests.post(endpoint3, files=files)
     print(response.text)
     ## grammatical error but correct string
-    if response.text == '{ succcess: true }':
-        dat_file.move_into(third_dir)
+    # if response.text == '{ succcess: true }':
+        # dat_file.move_into(third_dir)
 
-for dat_file in second_dir.glob("*Dia*.dat"):
-    dat_file.move_into(third_dir)
+# for dat_file in second_dir.glob("*Dia*.dat"):
+    # dat_file.move_into(third_dir)
     
