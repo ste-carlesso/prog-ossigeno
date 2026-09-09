@@ -11,28 +11,29 @@ from pathlib import Path
 import requests
 import tomllib
 
-with open('secret.toml', 'rb') as secret:
-    config = tomllib.load(secret)
+base_dir = Path('D:/')
 
-base_dir = Path(config['main']['base_dir'])
-token = config['api']['token']
-base_url = "https://fomdatamet.it"
-
-first_dir = base_dir / "Climate_Network"
+# first_dir = base_dir / "Climate_Network"
 second_dir = base_dir / "Climate_Network_bis"
 third_dir = base_dir / "Climate_Network_ter"
 
-endpoint3 = 'http://46.137.162.248/load-jobs'
-
+endpoint = 'http://46.137.162.248/load-jobs'
 
 for dat_file in second_dir.glob("*MainDataSet*.dat"):
-    files = {'file': open(dat_file, 'rb'),}
-    response = requests.post(endpoint3, files=files)
-    print(response.text)
+    with open(dat_file, 'rb') as file_object:
+        files = {'file': file_object,}
+        response = requests.post(endpoint, files=files)
+        print(response.text)
     ## grammatical error but correct string
-    # if response.text == '{ succcess: true }':
-        # dat_file.move_into(third_dir)
+    if response.text == '{ succcess: true }':
+        try:
+            dat_file.move_into(third_dir)
+        except:
+            print("can't move file to dest")
 
-# for dat_file in second_dir.glob("*Dia*.dat"):
-    # dat_file.move_into(third_dir)
-    
+
+for dat_file in second_dir.glob("*Dia*.dat"):
+    try:
+        dat_file.move_into(third_dir)
+    except:
+        print("can't move file to dest")

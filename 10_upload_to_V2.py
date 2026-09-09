@@ -13,43 +13,49 @@
 from pathlib import Path
 import requests
 import tomllib
-import os
-import glob
-import shutil
+
 
 with open('secret.toml', 'rb') as secret:
     config = tomllib.load(secret)
 
 base_dir = Path('D:/')
-
 token = config['api']['token']
 base_url = "https://fomdatamet.it"
-
 first_dir = base_dir / "Climate_Network"
 second_dir = base_dir / "Climate_Network_bis"
-endpoint1 = base_url + "/api/v1/load-jobs"
-endpoint2 = base_url + "/api/v1/battery-samples"
 
+# requests won't add a boundary when you pass files
+# if this header is set:  'Content-Type': 'multipart/form-data'
 headers = {
     'accept': 'application/json',
     'Authorization': f"Bearer {token}",
-    # requests won't add a boundary if this header is set when you pass files=
-    # 'Content-Type': 'multipart/form-data',
 }
 
-for dat_file in first_dir.glob("*MainDataSet*.dat"):
-    files = {'file': open(dat_file, 'rb'),}
-    response = requests.post(endpoint1, headers=headers, files=files)
-    print(response.json())
-    # if response.json()['success']:
-        # #dat_file.move(second_dir)
-        # shutil.copyfile(dat_file, second_dir)
-        # os.rename(dat_file)
+endpoint = base_url + "/api/v1/load-jobs"
 
+for dat_file in first_dir.glob("*MainDataSet*.dat"):
+    with open(dat_file, 'rb') as file_object:
+        files = {'file': file_object,}
+        response = requests.post(endpoint, headers=headers, files=files)
+        print(response.json())
+    if response.json()['success']:
+        try:
+            dat_file.move_into(second_dir)
+        except:
+            print("can't move file to dest")
+
+
+endpoint = base_url + "/api/v1/battery-samples"
+ 
 for dat_file in first_dir.glob("*Dia*.dat"):
-    files = {'file': open(dat_file, 'rb'),}
-    response = requests.post(endpoint2, headers=headers, files=files)
-    print(response.json())
-    # if response.json()['status'] == 'success':
-        # shutil.copyfile(dat_file, second_dir)
-        # os.remove(dat_file)
+    with open(dat_file, 'rb') as file_object:
+        files = {'file': file_object,}
+        response = requests.post(endpoint, headers=headers, files=files)
+        print(response.json())
+
+    if response.json()['status'] == 'success':
+        try:
+            dat_file.move_into(second_dir)
+        except:
+            print("can't move file to dest")
+
