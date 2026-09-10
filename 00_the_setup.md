@@ -27,5 +27,9 @@ Esso legge cronical.dat e all'ora stabilita esegue lo script tizio.bat.
 A sua volta lo script bat contiene le istruzioni per eseguire lo script Python tizio.py
 (nell'ambiente virtuale), e scrivere il file di log corrispondente tizio.log
 
+disattivare/ attivare il servizio da terminale Amminstratore
+net stop cronical
+net start cronical
+
 
 L'invio a Fosforo deve essere fatto manualmente dopo aver attivato la VPN fosforo.

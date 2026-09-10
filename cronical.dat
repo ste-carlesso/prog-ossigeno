@@ -1,22 +1,41 @@
-﻿# Jobs to run
-# *    *    *    *    *  command to execute
-# ¦    ¦    ¦    ¦    ¦
-# ¦    ¦    ¦    ¦    +----- day of week (0 - 6) (0 to 6 are Sunday to Saturday, or use names)
-# ¦    ¦    ¦    +---------- month (1 - 12)
-# ¦    ¦    +--------------- day of month (1 - 31)
-# ¦    +-------------------- hour (0 - 23)
-# +------------------------- min (0 - 59)
+﻿# === Cronical.exe Global settings ===
+# https://github.com/mgefvert/Cronical.git
 
+ServiceChecks = 15              # Check services every x seconds, default is every second
+Timeout       = 540            # Jobs may run for up to x seconds
+
+
+
+# === Jobs to run ===
 
 # Il loggernet scarica nella prima cartella
 
-# alle 5:30, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
+# Alle 5:30, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
 30 5 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
 
-# Alle 6:00 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
-0 6 * * * cmd /c D:\script_ossigeno\21_upload_to_V1.bat
+# Alle 6:10 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
+00 6 * * * cmd /c D:\script_ossigeno\21_upload_to_V1.bat
 
-# Alle 6:50 invio a fosforo (MainDataset, Dia, RAW) e poi sposto nella quarta cartella
-## 50 6 * * * cmd /c D:\script_ossigeno\32_upload_to_fosforo.bat
+# Alle 6:40 connetto a FosforoVPN
+20 6 * * * cmd /c D:\script_ossigeno\40_connect.bat
+
+# Multipli invii a fosforo (MainDataset, Dia, RAW) e poi sposto nella quarta cartella
+30 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+40 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+00 7 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+
+# Alle 7:20 disconnetto da FosforoVPN
+20 7 * * * cmd /c D:\script_ossigeno\60_disconnect.bat
 
 
+# ---------------------------------------------------------
+# TEST
+# 5 10 * * * cmd /c D:\script_ossigeno\40_connect.bat
+
+# 10 10 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+
+# 30 10 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+
+# 40 10 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+
+# 0 11 * * * cmd /c D:\script_ossigeno\60_disconnect.bat
