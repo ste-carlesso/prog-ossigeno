@@ -2,7 +2,7 @@
 # https://github.com/mgefvert/Cronical.git
 
 ServiceChecks = 15              # Check services every x seconds, default is every second
-Timeout       = 540            # Jobs may run for up to x seconds
+Timeout       = 7200            # Jobs may run for up to x seconds
 
 
 
@@ -17,15 +17,15 @@ Timeout       = 540            # Jobs may run for up to x seconds
 00 6 * * * cmd /c D:\script_ossigeno\21_upload_to_V1.bat
 
 # Alle 6:40 connetto a FosforoVPN
-20 6 * * * cmd /c D:\script_ossigeno\40_connect.bat
+# 20 6 * * * cmd /c D:\script_ossigeno\40_connect.bat
 
 # Multipli invii a fosforo (MainDataset, Dia, RAW) e poi sposto nella quarta cartella
-30 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
-40 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
-00 7 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+# 30 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+# 40 6 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
+# 00 7 * * * cmd /c D:\script_ossigeno\52_upload_to_fosforo.bat
 
 # Alle 7:20 disconnetto da FosforoVPN
-20 7 * * * cmd /c D:\script_ossigeno\60_disconnect.bat
+# 20 7 * * * cmd /c D:\script_ossigeno\60_disconnect.bat
 
 
 # ---------------------------------------------------------
