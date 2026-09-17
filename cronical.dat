@@ -13,8 +13,12 @@ Timeout       = 7200            # Jobs may run for up to x seconds
 # Alle 5:30, invio a V2 (MainDataset, Dia) e poi sposto nella seconda cartella
 30 5 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
 
-# Alle 6:10 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
+# Alle 6:00 invio a V1 (MainDataset, Dia) e poi sposto nella terza cartella
 00 6 * * * cmd /c D:\script_ossigeno\21_upload_to_V1.bat
+
+20 6 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
+
+20 7 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
 
 # Alle 6:40 connetto a FosforoVPN
 # 20 6 * * * cmd /c D:\script_ossigeno\40_connect.bat
