@@ -17,3 +17,4 @@ Timeout       = 7200            # Jobs may run for up to x seconds
 00 8 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
 00 9 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
 00 10 * * * cmd /c D:\script_ossigeno\11_upload_to_V2.bat
+

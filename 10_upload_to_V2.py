@@ -13,6 +13,10 @@
 from pathlib import Path
 import requests
 import tomllib
+from datetime import datetime as dt
+
+def time_string():
+    return dt.strftime(dt.now(), '%Y-%m-%d_%H:%M:%S')
 
 
 with open('secret.toml', 'rb') as secret:
@@ -37,12 +41,12 @@ for dat_file in first_dir.glob("*MainDataSet*.dat"):
     with open(dat_file, 'rb') as file_object:
         files = {'file': file_object,}
         response = requests.post(endpoint, headers=headers, files=files)
-        print(response.json())
+        print([time_string(), response.json()], sep='\t')
     if response.json()['success']:
         try:
             dat_file.move_into(second_dir)
         except:
-            print("can't move file to dest")
+            print([time_string(), "can't move file to dest"], sep='\t')
 
 
 endpoint = base_url + "/api/v1/battery-samples"
@@ -51,11 +55,11 @@ for dat_file in first_dir.glob("*Dia*.dat"):
     with open(dat_file, 'rb') as file_object:
         files = {'file': file_object,}
         response = requests.post(endpoint, headers=headers, files=files)
-        print(response.json())
+        print([time_string(), response.json()], sep='\t')
 
     if response.json()['status'] == 'success':
         try:
             dat_file.move_into(second_dir)
         except:
-            print("can't move file to dest")
+            print([time_string(), "can't move file to dest"], sep='\t')
 
