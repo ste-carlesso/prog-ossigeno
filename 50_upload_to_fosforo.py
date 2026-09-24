@@ -59,7 +59,7 @@ def to_fosforo():
     if successful move to 4th dir
     Requires keys setup and ssh config in C:/Users/$USER/.ssh/config
     '''
-    for src_path in third_dir.glob("*.dat"):
+    for src_path in second_dir.glob("*.dat"):
         file_name = str(src_path.name)
         if fnmatch.fnmatch(file_name, "*MainDataSet*"):
             type_str = "_MainDataSet_"
@@ -99,7 +99,7 @@ def to_fosforo():
         else:
             logging.info(F"{returncode} {stderr}")
             try:
-                destination = fourth_dir / file_name
+                destination = third_dir / file_name
                 # copy the file preserving some metadata
                 shutil.copy2(src=src_path, dst=destination)
             except:
